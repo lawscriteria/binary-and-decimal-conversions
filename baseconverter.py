@@ -1,6 +1,11 @@
-import numpy as np
-
 print("Input a number you want converted. Note that if there is ambiguity, meaning if your number can be both binary and decimal, you should indicate with an indicator (a letter at the end of your number, either d or b, specifying whether your number is a 'd'ecimal or 'b'inary). If there is no indicator at the end of the string provided, the number is assumed to be in binary.")
+
+def floor_log(num, base):
+    i = 0
+    while num >= base:
+        num /= base
+        i += 1
+    return i
 
 dig = [f'{d}' for d in range(10)]
 def ambchecker(num_str, range_start):
@@ -32,14 +37,14 @@ def ten2two(n):
     if nint == 0:
         return 0
     
-    l = int(np.log2(nint))
-    b = [0]*(l+1)
+    l = floor_log(nint, 2)
+    b = [0]*(l+1) 
 
     bint = 0
     for i in range(l+1):
         if nint < 1: break
 
-        p = int(np.log2(nint))
+        p = floor_log(nint, 2)
         nint -= 2**p
         j = -p-1
 
