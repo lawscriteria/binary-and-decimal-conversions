@@ -30,6 +30,11 @@ def ten2two(n):
     if n[-1] not in dig:
         n = n[:-1]
 
+    s = 1
+    if n[0] == '-':
+        n = n[1:]
+        s = -1
+
     for i in n:
         if i not in dig: return TypeError, "The number provided couldn't be recognized. Please try again."
 
@@ -49,7 +54,7 @@ def ten2two(n):
         j = -p-1
 
         b[j] = 1
-        bint += sign(n)*(10**p)*b[j]
+        bint += s*(10**p)*b[j]
     
     return bint
 
@@ -57,6 +62,11 @@ def ten2two(n):
 def two2ten(n):
     if n[-1] not in dig:
         n = n[:-1]
+
+    s = 1
+    if n[0] == '-':
+        n = n[1:]
+        s = -1
 
     for j in n:
         if j not in dig[:2]: return TypeError, "The number provided couldn't be recognized. Please try again."
@@ -67,16 +77,9 @@ def two2ten(n):
     l = len(n)
     bint = 0
     for i in range(l):
-        bint += sign(n)*int(n[i])*(2**(l-(i+1)))
+        bint += s*int(n[i])*(2**(l-(i+1)))
 
     return bint
-
-def sign(arg):
-    s = 1
-    if arg[0] == '-':
-        arg = arg[1:]
-        s = -1
-    return s
     
 while True:
     userinput = input("What's your number? ")
